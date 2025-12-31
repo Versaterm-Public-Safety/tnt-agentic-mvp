@@ -1,32 +1,15 @@
 
-
 > @tnt/server@1.0.0 test /Users/rmohid/Stash/learning/tnt-agentic-mvp/packages/server
 > vitest run
 
 [33mThe CJS build of Vite's Node API is deprecated. See https://vite.dev/guide/troubleshooting.html#vite-cjs-node-api-deprecated for more details.[39m
 
-[7m[1m[36m RUN [39m[22m[27m [36mv1.6.1[39m [90m/Users/rmohid/Stash/learning/tnt-agentic-mvp/packages/server[39m
+ RUN  v1.6.1 /Users/rmohid/Stash/learning/tnt-agentic-mvp/packages/server
 
- [32m✓[39m [2mtests/[22mmessages[2m.test.ts[22m[2m (10)[22m
-   [32m✓[39m WebSocket Messages[2m (10)[22m
-     [32m✓[39m Client to Server messages[2m (2)[22m
-       [32m✓[39m should create valid start_call message
-       [32m✓[39m should create valid end_call message
-     [32m✓[39m Server to Client messages[2m (4)[22m
-       [32m✓[39m should create valid transcript message
-       [32m✓[39m should create valid call_status message for active call
-       [32m✓[39m should create valid call_status message for completed call
-       [32m✓[39m should create valid error message
-     [32m✓[39m Message validation[2m (2)[22m
-       [32m✓[39m should validate message type field exists
-       [32m✓[39m should validate transcript has required fields
-     [32m✓[39m JSON serialization[2m (2)[22m
-       [32m✓[39m should serialize and deserialize dates as ISO strings
-       [32m✓[39m should handle special characters in text
+ ✓ tests/messages.test.ts  (10 tests) 2ms
 
-[2m Test Files [22m [1m[32m1 passed[39m[22m[90m (1)[39m
-[2m      Tests [22m [1m[32m10 passed[39m[22m[90m (10)[39m
-[2m   Start at [22m 14:01:24
-[2m   Duration [22m 246ms[2m (transform 45ms, setup 0ms, collect 36ms, tests 5ms, environment 0ms, prepare 60ms)[22m
+ Test Files  1 passed (1)
+      Tests  10 passed (10)
+   Start at  14:04:58
+   Duration  154ms (transform 18ms, setup 0ms, collect 15ms, tests 2ms, environment 0ms, prepare 34ms)
 
-[?25h

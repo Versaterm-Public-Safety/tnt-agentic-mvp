@@ -3,8 +3,6 @@
  *
  * This package provides the WebSocket server that streams transcripts
  * to connected clients in real-time.
- * Implementation pending - Test Agent has created tests,
- * Implementation Agent will create the actual server.
  */
-export {};
+export * from './messages';
 //# sourceMappingURL=index.js.map
