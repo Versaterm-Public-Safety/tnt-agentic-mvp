@@ -11,6 +11,9 @@ importers:
       '@eslint/js':
         specifier: ^9.17.0
         version: 9.39.2
+      '@types/ws':
+        specifier: ^8.18.1
+        version: 8.18.1
       eslint:
         specifier: ^9.17.0
         version: 9.39.2
@@ -29,6 +32,9 @@ importers:
       vitest:
         specifier: ^3.0.0
         version: 3.2.4(@types/node@22.19.3)(jsdom@27.4.0)(tsx@4.21.0)
+      ws:
+        specifier: ^8.18.3
+        version: 8.18.3
 
   packages/core:
     devDependencies:
