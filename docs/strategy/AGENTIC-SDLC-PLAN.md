@@ -76,121 +76,183 @@ Build a functional MVP demonstrating real-time 9-1-1 call transcription that pro
 
 ---
 
-## 1.4 Spec Kit Conventions Integration
+## 1.4 Spec Kit Integration (INSTALLED)
 
-This project follows **GitHub Spec Kit** conventions for specification-driven development (SDD), ensuring specifications serve as the authoritative source of truth.
+This project uses **GitHub Spec Kit** for specification-driven development. Spec-kit has been initialized with Copilot agent support.
 
-### 1.4.1 Spec Kit Installation
+### 1.4.1 Installation (COMPLETE)
 
-**Prerequisites**: Python with `uv` tool installed
+Spec-kit is already installed. To re-initialize or update:
 
 ```bash
-# Install specify-cli globally
-uv tool install specify-cli --from git+https://github.com/github/spec-kit.git
-
-# Or initialize directly in a project
-uvx --from git+https://github.com/github/spec-kit.git specify init .
+# Initialize spec-kit in current directory
+uvx --from git+https://github.com/github/spec-kit.git specify init --here --ai copilot
 ```
 
-### 1.4.2 Spec Kit Commands
-
-Use these slash commands with your AI agent (Copilot, Claude, etc.):
-
-| Command | Purpose | Agent Phase |
-|---------|---------|-------------|
-| `/speckit.constitution` | Define project rules and principles | Setup |
-| `/speckit.specify` | Describe features (focus on UX, not tech) | Research Agent |
-| `/speckit.clarify` | Resolve ambiguities and add constraints | Research Agent |
-| `/speckit.plan` | Define technical architecture choices | Research Agent |
-| `/speckit.tasks` | Generate implementation task breakdown | Test Agent |
-| `/speckit.implement` | Execute implementation | Implementation Agent |
-
-### 1.4.3 Core Principles
-
-**Specifications as Living Artifacts**:
-- Specs are dynamic, evolving documents coupled to the codebase
-- As requirements change, specs are updated first
-- Specs define "what" and "why" before "how"
-
-**Phase-Gated Development with Spec Kit**:
-1. **Constitution** (`/speckit.constitution`): Define rules (Setup)
-2. **Specify** (`/speckit.specify`): Define user needs, goals (Research Agent)
-3. **Clarify** (`/speckit.clarify`): Resolve ambiguities (Research Agent)
-4. **Plan** (`/speckit.plan`): Detail technical architecture (Research Agent)
-5. **Task** (`/speckit.tasks`): Break down into atomic units (Test Agent)
-6. **Implement** (`/speckit.implement`): Write code (Implementation Agent)
-7. **Validate**: Verify against specs (Validation Agent)
-8. **Secure**: Security audit (Security Agent)
-9. **Integrate**: E2E validation (Integration Agent)
-10. **Document**: Ensure docs match reality (Documentation Agent)
-
-### 1.4.4 Spec Kit File Structure
+### 1.4.2 Spec Kit Structure
 
 ```
 tnt-agentic-mvp/
-├── spec.md                        # Master specification (single source of truth)
-├── constitution.md                # Technical principles, non-negotiables
-├── plan.md                        # Technical plan (optional, can be in docs/)
-├── specs/
-│   ├── features/                  # Feature-level specifications
-│   │   └── real-time-transcription.md
-│   └── tasks/                     # Granular task breakdowns (from /speckit.tasks)
-├── docs/
-│   ├── architecture/              # ADRs (architecture decisions)
-│   ├── audit-trail/               # Agent work logs (traceability)
-│   ├── handoffs/                  # Context transfer documents
-│   └── strategy/                  # This plan document
-└── packages/                      # Implementation code
+├── constitution.md                    # Project principles (spec-kit format)
+├── spec.md                            # Product specification  
+├── .specify/
+│   ├── memory/
+│   │   └── constitution.md            # Copy of constitution for agent memory
+│   ├── scripts/bash/                  # Setup and utility scripts
+│   └── templates/                     # Spec-kit templates
+│       ├── spec-template.md           # Feature specification template
+│       ├── plan-template.md           # Implementation plan template
+│       └── tasks-template.md          # Task breakdown template
+├── .github/
+│   ├── agents/                        # Copilot agent definitions
+│   │   ├── speckit.constitution.agent.md
+│   │   ├── speckit.specify.agent.md
+│   │   ├── speckit.clarify.agent.md
+│   │   ├── speckit.plan.agent.md
+│   │   ├── speckit.tasks.agent.md
+│   │   ├── speckit.implement.agent.md
+│   │   ├── speckit.analyze.agent.md
+│   │   └── speckit.checklist.agent.md
+│   └── prompts/                       # Prompt templates for each command
+├── specs/                             # Feature specifications (created by workflow)
+│   └── [feature-name]/
+│       ├── spec.md                    # Feature spec (/speckit.specify output)
+│       ├── plan.md                    # Implementation plan (/speckit.plan output)
+│       └── tasks.md                   # Task list (/speckit.tasks output)
+└── packages/                          # Implementation code
 ```
 
-### 1.4.5 Spec Kit Workflow Alignment
+### 1.4.3 Spec Kit Workflow
 
-| Spec Kit Command | Agent | Output | Verification |
-|------------------|-------|--------|--------------|
-| `/speckit.constitution` | Setup | constitution.md | Rules defined |
-| `/speckit.specify` | Research Agent | Feature specs | Spec completeness |
-| `/speckit.clarify` | Research Agent | Clarified requirements | No ambiguities |
-| `/speckit.plan` | Research Agent | ADRs, architecture | ADR rationale |
-| `/speckit.tasks` | Test Agent | Task breakdown, tests | Tests valid |
-| `/speckit.implement` | Implementation Agent | Production code | All tests pass |
-| (validation) | Validation Agent | Gap analysis | Requirements met |
-| (security) | Security Agent | Vulnerability assessment | No critical vulns |
-| (integration) | Integration Agent | E2E tests | Full stack works |
-| (documentation) | Documentation Agent | Updated docs | Docs match code |
+The spec-kit workflow replaces the Planning Phase with a more structured approach:
 
-### 1.4.6 Constitution (Technical Principles)
+| Phase | Spec Kit Command | Purpose | Output |
+|-------|------------------|---------|--------|
+| 1 | `/speckit.constitution` | Define project rules | `constitution.md` |
+| 2 | `/speckit.specify` | Define feature (UX focus) | `specs/[feature]/spec.md` |
+| 3 | `/speckit.clarify` | Resolve ambiguities | Updated spec with clarifications |
+| 4 | `/speckit.plan` | Technical architecture | `specs/[feature]/plan.md` |
+| 5 | `/speckit.tasks` | Task breakdown | `specs/[feature]/tasks.md` |
+| 6 | `/speckit.implement` | Build the feature | Production code |
+| 7 | `/speckit.analyze` | Cross-artifact consistency | Analysis report |
+| 8 | `/speckit.checklist` | Quality validation | Checklist report |
 
-**Non-Negotiable Rules** (defined in `constitution.md`):
-1. **Type Safety**: TypeScript strict mode, no `any` types
-2. **Testing**: TDD approach, behavior over implementation
-3. **Clean Code**: SOLID principles, meaningful names, small functions
-4. **Security**: Input validation, no eval/dynamic code, no secrets
-5. **Documentation**: Every decision has rationale (ADRs)
-6. **Auditability**: Every change logged in audit trail
-7. **Immutability**: Domain entities immutable where appropriate
+### 1.4.4 Agent Workflow Mapping
 
-**Architecture Principles**:
-- Monorepo structure (Turborepo)
-- Package independence (loose coupling)
-- Clear boundaries (domain, server, UI)
-- RFC compliance (WebSocket, SIPREC when implemented)
+| Spec Kit Phase | Agentic Agent | Combined Workflow |
+|----------------|---------------|-------------------|
+| Constitution | Setup | Define rules ONCE at project start |
+| Specify + Clarify + Plan | Research Agent | Create specs/[feature]/spec.md and plan.md |
+| Tasks | Test Agent | Generate specs/[feature]/tasks.md with test tasks |
+| Implement | Implementation Agent | Execute tasks, make tests pass |
+| Analyze | Validation Agent | Cross-artifact consistency check |
+| Checklist | Security Agent | Quality and security validation |
+| (manual) | Integration Agent | E2E tests, smoke tests |
+| (manual) | Documentation Agent | Doc verification |
 
-### 1.4.7 Spec-to-Code Traceability
+### 1.4.5 Feature Specification Format (Spec Kit)
 
-Every code artifact traces back to specification:
-- **Code** → Test → Spec → ADR → PRD
-- **Domain Model** → Feature Spec Section 5 → PRD Section 4.1
-- **WebSocket Messages** → Feature Spec Section 6 → ADR-002
-- **Validation Logic** → Test → Feature Spec Acceptance Criteria
+Feature specs follow the spec-kit template (`/.specify/templates/spec-template.md`):
 
-### 1.4.8 AI Agent Context
+```markdown
+# Feature Specification: [FEATURE NAME]
 
-Specifications are written to be AI-consumable:
-- Clear, actionable language
-- Structured markdown
-- Explicit acceptance criteria
-- Minimal ambiguity
-- Handoff documents preserve context between agents
+**Feature Branch**: `[###-feature-name]`  
+**Created**: [DATE]  
+**Status**: Draft
+
+## User Scenarios & Testing (mandatory)
+### User Story 1 - [Title] (Priority: P1)
+[Description]
+**Acceptance Scenarios**:
+1. **Given** [state], **When** [action], **Then** [outcome]
+
+### Edge Cases
+- What happens when [boundary condition]?
+
+## Requirements (mandatory)
+### Functional Requirements
+- **FR-001**: System MUST [capability]
+
+### Key Entities
+- **[Entity]**: [Description]
+
+## Success Criteria (mandatory)
+- **SC-001**: [Measurable metric]
+```
+
+### 1.4.6 Implementation Plan Format (Spec Kit)
+
+Plans follow the spec-kit template (`/.specify/templates/plan-template.md`):
+
+```markdown
+# Implementation Plan: [FEATURE]
+
+**Branch**: `[###-feature-name]` | **Date**: [DATE]
+
+## Summary
+[Primary requirement + technical approach]
+
+## Technical Context
+**Language/Version**: TypeScript 5.x strict mode
+**Primary Dependencies**: ws, vitest, turborepo
+**Testing**: Vitest with AAA pattern
+**Target Platform**: Node.js 20+, Modern browsers
+
+## Constitution Check
+- [ ] TypeScript strict mode
+- [ ] TDD mandatory
+- [ ] No `any` types
+
+## Project Structure
+[Source code layout for this feature]
+
+## Complexity Tracking
+[Any deviations from simplicity principles]
+```
+
+### 1.4.7 Task Format (Spec Kit)
+
+Tasks follow the spec-kit template (`/.specify/templates/tasks-template.md`):
+
+```markdown
+# Tasks: [FEATURE NAME]
+
+## Phase 1: Setup
+- [ ] T001 Create project structure
+- [ ] T002 [P] Configure dependencies
+
+## Phase 2: User Story 1 - [Title] (P1) 🎯 MVP
+### Tests (write FIRST, must FAIL)
+- [ ] T003 [P] [US1] Unit test for [entity]
+- [ ] T004 [P] [US1] Integration test for [flow]
+
+### Implementation
+- [ ] T005 [US1] Implement [entity]
+- [ ] T006 [US1] Implement [service]
+
+## Dependencies
+- [P] = Parallelizable
+- [US1] = User Story 1
+```
+
+### 1.4.8 Executing the Spec Kit Workflow
+
+When user says "Execute the plan", follow this workflow:
+
+```
+1. READ constitution.md and spec.md
+2. CREATE specs/[feature]/ directory structure
+3. RUN /speckit.specify → Generate feature spec
+4. RUN /speckit.clarify → Resolve ambiguities (if any)
+5. RUN /speckit.plan → Generate implementation plan
+6. RUN /speckit.tasks → Generate task breakdown
+7. EXECUTE tasks using /speckit.implement
+8. VALIDATE using /speckit.analyze and /speckit.checklist
+9. COMPLETE with Integration and Documentation agents
+```
+
+Each phase creates artifacts in `specs/[feature]/` that serve as input to the next phase.
 
 ---
 
