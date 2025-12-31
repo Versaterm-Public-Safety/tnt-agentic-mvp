@@ -13,29 +13,29 @@
 
 | Phase | Tasks | Completed | Status |
 |-------|-------|-----------|--------|
-| Planning | 4 | 0 | ⬜ TODO |
-| Research Agent | 20 | 0 | ⬜ TODO |
-| Test Agent | 25 | 0 | ⬜ TODO |
-| Implementation Agent | 35 | 0 | ⬜ TODO |
+| Planning | 4 | 4 | ✅ DONE |
+| Research Agent | 20 | 14 | 🟡 IN PROGRESS |
+| Test Agent | 25 | 20 | 🟡 IN PROGRESS |
+| Implementation Agent | 35 | 22 | 🟡 IN PROGRESS |
 | Validation Agent | 6 | 0 | ⬜ TODO |
 | Security Agent | 7 | 0 | ⬜ TODO |
 | Integration Agent | 10 | 0 | ⬜ TODO |
 | Documentation Agent | 6 | 0 | ⬜ TODO |
 | Deployment Agent | 8 | 0 | ⬜ TODO |
-| **TOTAL** | **121** | **0** | **0%** |
+| **TOTAL** | **121** | **60** | **50%** |
 
 ---
 
-## Phase 0: Planning ⬜
+## Phase 0: Planning ✅
 
-- [ ] **0.1** Read spec.md and extract all requirements
-- [ ] **0.2** Read constitution.md for project rules  
-- [ ] **0.3** Generate comprehensive TODO list
-- [ ] **0.4** Validate acceptance criteria coverage
+- [x] **0.1** Read spec.md and extract all requirements
+- [x] **0.2** Read constitution.md for project rules  
+- [x] **0.3** Generate comprehensive TODO list
+- [x] **0.4** Validate acceptance criteria coverage
 
 ---
 
-## Phase 1: Research Agent (20 tasks)
+## Phase 1: Research Agent (20 tasks) 🟡
 
 **Trigger**: Planning complete
 **Output**: Feature specs, ADRs, infrastructure setup, research notes, handoff
@@ -43,7 +43,7 @@
 
 ### Research Tasks (Evidence-Based)
 
-- [ ] **1.1** Research SIPREC protocol (RFC 7865/7866)
+- [x] **1.1** Research SIPREC protocol (RFC 7865/7866)
   - Document INVITE handling, SDP parsing, RTP management, metadata XML
   - Output: `specs/research/siprec-protocol.md`
 
@@ -61,40 +61,40 @@
 
 ### Infrastructure Setup Tasks
 
-- [ ] **1.5** Create package directory structure (7 packages)
-- [ ] **1.6** Initialize package.json for each workspace
-- [ ] **1.7** Configure shared TypeScript (strict mode, no `any`)
-- [ ] **1.8** Setup Vitest with coverage (80% threshold)
-- [ ] **1.9** Setup ESLint and Prettier
+- [x] **1.5** Create package directory structure (7 packages)
+- [x] **1.6** Initialize package.json for each workspace
+- [x] **1.7** Configure shared TypeScript (strict mode, no `any`)
+- [x] **1.8** Setup Vitest with coverage (80% threshold)
+- [x] **1.9** Setup ESLint and Prettier
 
 ### Requirements Analysis
 
-- [ ] **1.10** Decompose PRD into categorized requirements (FR/NFR/Constraints)
-- [ ] **1.11** Map all acceptance criteria to requirements
-- [ ] **1.12** Identify ambiguities and edge cases
+- [x] **1.10** Decompose PRD into categorized requirements (FR/NFR/Constraints)
+- [x] **1.11** Map all acceptance criteria to requirements
+- [x] **1.12** Identify ambiguities and edge cases
 
 ### Specification Tasks
 
-- [ ] **1.13** Create feature specification (`specs/features/real-time-transcription.md`)
+- [x] **1.13** Create feature specification (`specs/features/real-time-transcription.md`)
   - All 10 sections per AGENTIC-SDLC-PLAN.md § 3.1.2
   - ACs in Given/When/Then format
 
 ### Architecture Decision Records
 
-- [ ] **1.14** Create ADR-001: Turborepo monorepo
-- [ ] **1.15** Create ADR-002: WebSocket transport
-- [ ] **1.16** Create ADR-003: Whisper.cpp local transcription
-- [ ] **1.17** Create ADR-004: SIPREC integration with fan-out proxy
+- [x] **1.14** Create ADR-001: Turborepo monorepo
+- [x] **1.15** Create ADR-002: WebSocket transport
+- [x] **1.16** Create ADR-003: Whisper.cpp local transcription
+- [x] **1.17** Create ADR-004: SIPREC integration with fan-out proxy
 
 ### Handoff Tasks
 
-- [ ] **1.18** Create Research Agent audit trail
-- [ ] **1.19** Run build/test verification (should pass with empty structure)
+- [x] **1.18** Create Research Agent audit trail
+- [x] **1.19** Run build/test verification (should pass with empty structure)
 - [ ] **1.20** Create handoff document to Test Agent
 
 ---
 
-## Phase 2: Test Agent (25 tasks)
+## Phase 2: Test Agent (25 tasks) 🟡
 
 **Trigger**: Research handoff exists
 **Output**: Unit tests for all packages, integration test structure, handoff
@@ -102,46 +102,46 @@
 
 ### @tnt/core Tests
 
-- [ ] **2.1** Transcript value object tests (creation, validation, immutability)
-- [ ] **2.2** Call aggregate tests (lifecycle, state transitions)
-- [ ] **2.3** Speaker type tests (validation, type safety)
-- [ ] **2.4** Domain errors tests (TranscriptError, CallError)
+- [x] **2.1** Transcript value object tests (creation, validation, immutability)
+- [x] **2.2** Call aggregate tests (lifecycle, state transitions)
+- [x] **2.3** Speaker type tests (validation, type safety)
+- [x] **2.4** Domain errors tests (TranscriptError, CallError)
 
 ### @tnt/siprec Tests
 
-- [ ] **2.5** SIPREC SRS tests (session handling, SDP parsing)
-- [ ] **2.6** SIPREC message parser tests (INVITE, multipart MIME, metadata XML)
-- [ ] **2.7** RTP stream handler tests (audio extraction, buffering)
-- [ ] **2.8** SIPREC types and interfaces tests
+- [x] **2.5** SIPREC SRS tests (session handling, SDP parsing)
+- [x] **2.6** SIPREC message parser tests (INVITE, multipart MIME, metadata XML)
+- [x] **2.7** RTP stream handler tests (audio extraction, buffering)
+- [x] **2.8** SIPREC types and interfaces tests
 
 ### @tnt/siprec-proxy Tests
 
-- [ ] **2.9** Fan-out proxy tests (multi-consumer routing)
-- [ ] **2.10** SIP proxy tests (INVITE forwarding, session management)
+- [x] **2.9** Fan-out proxy tests (multi-consumer routing)
+- [x] **2.10** SIP proxy tests (INVITE forwarding, session management)
 
 ### @tnt/sbc-simulator Tests
 
-- [ ] **2.11** SBC simulator tests (SIPREC session generation)
-- [ ] **2.12** Audio stream simulation tests (PCM generation)
+- [x] **2.11** SBC simulator tests (SIPREC session generation)
+- [x] **2.12** Audio stream simulation tests (PCM generation)
 
 ### @tnt/transcription Tests
 
-- [ ] **2.13** TranscriptionService interface tests
-- [ ] **2.14** Whisper adapter tests (model loading, transcription)
-- [ ] **2.15** Audio buffer handling tests (format validation, chunking)
-- [ ] **2.16** Mock adapter tests (for fast testing)
+- [x] **2.13** TranscriptionService interface tests
+- [x] **2.14** Whisper adapter tests (model loading, transcription)
+- [x] **2.15** Audio buffer handling tests (format validation, chunking)
+- [x] **2.16** Mock adapter tests (for fast testing)
 
 ### @tnt/server Tests
 
-- [ ] **2.17** WebSocket server tests (connection, disconnection, heartbeat)
-- [ ] **2.18** Message protocol tests (serialization, validation)
+- [x] **2.17** WebSocket server tests (connection, disconnection, heartbeat)
+- [x] **2.18** Message protocol tests (serialization, validation)
 - [ ] **2.19** Audio routing tests (SIPREC → Transcription → WebSocket)
 - [ ] **2.20** Error handling tests (invalid messages, connection failures)
 
 ### @tnt/ui Tests
 
-- [ ] **2.21** TranscriptPanel component tests (rendering, scrolling, updates)
-- [ ] **2.22** TranscriptEntry component tests (speaker labels, formatting)
+- [x] **2.21** TranscriptPanel component tests (rendering, scrolling, updates)
+- [x] **2.22** TranscriptEntry component tests (speaker labels, formatting)
 - [ ] **2.23** CallStatus component tests (call state display)
 - [ ] **2.24** useWebSocket hook tests (connection management, reconnection)
 
@@ -151,7 +151,7 @@
 
 ---
 
-## Phase 3: Implementation Agent (35 tasks)
+## Phase 3: Implementation Agent (35 tasks) 🟡
 
 **Trigger**: Test handoff exists
 **Output**: Production code passing all tests, handoff
@@ -159,40 +159,40 @@
 
 ### @tnt/core Implementation (5 tasks)
 
-- [ ] **3.1** Implement Transcript value object
-- [ ] **3.2** Implement Call aggregate
-- [ ] **3.3** Implement Speaker type
-- [ ] **3.4** Implement domain errors
-- [ ] **3.5** Create @tnt/core exports
+- [x] **3.1** Implement Transcript value object
+- [x] **3.2** Implement Call aggregate
+- [x] **3.3** Implement Speaker type
+- [x] **3.4** Implement domain errors
+- [x] **3.5** Create @tnt/core exports
 
 ### @tnt/siprec Implementation (6 tasks)
 
-- [ ] **3.6** Implement SIPREC SRS (Session Recording Server)
-- [ ] **3.7** Implement SDP parser
-- [ ] **3.8** Implement SIPREC message parser (INVITE, metadata XML)
-- [ ] **3.9** Implement RTP stream handler
-- [ ] **3.10** Implement SIPREC types
-- [ ] **3.11** Create @tnt/siprec exports
+- [x] **3.6** Implement SIPREC SRS (Session Recording Server)
+- [x] **3.7** Implement SDP parser
+- [x] **3.8** Implement SIPREC message parser (INVITE, metadata XML)
+- [x] **3.9** Implement RTP stream handler
+- [x] **3.10** Implement SIPREC types
+- [x] **3.11** Create @tnt/siprec exports
 
 ### @tnt/siprec-proxy Implementation (3 tasks)
 
-- [ ] **3.12** Implement fan-out proxy (multi-consumer routing)
-- [ ] **3.13** Implement SIP proxy forwarding
-- [ ] **3.14** Create @tnt/siprec-proxy exports
+- [x] **3.12** Implement fan-out proxy (multi-consumer routing)
+- [x] **3.13** Implement SIP proxy forwarding
+- [x] **3.14** Create @tnt/siprec-proxy exports
 
 ### @tnt/sbc-simulator Implementation (3 tasks)
 
-- [ ] **3.15** Implement SBC simulator (SIPREC session generator)
-- [ ] **3.16** Implement audio stream generator (PCM)
-- [ ] **3.17** Create @tnt/sbc-simulator exports
+- [x] **3.15** Implement SBC simulator (SIPREC session generator)
+- [x] **3.16** Implement audio stream generator (PCM)
+- [x] **3.17** Create @tnt/sbc-simulator exports
 
 ### @tnt/transcription Implementation (5 tasks)
 
-- [ ] **3.18** Implement TranscriptionService interface
-- [ ] **3.19** Implement Whisper adapter (whisper.cpp binding)
-- [ ] **3.20** Implement audio utilities (format validation, chunking)
-- [ ] **3.21** Implement mock adapter (for fast tests)
-- [ ] **3.22** Create @tnt/transcription exports
+- [x] **3.18** Implement TranscriptionService interface
+- [x] **3.19** Implement Whisper adapter (whisper.cpp binding)
+- [x] **3.20** Implement audio utilities (format validation, chunking)
+- [x] **3.21** Implement mock adapter (for fast tests)
+- [x] **3.22** Create @tnt/transcription exports
 
 ### @tnt/server Implementation (6 tasks)
 
@@ -205,8 +205,8 @@
 
 ### @tnt/ui Implementation (6 tasks)
 
-- [ ] **3.29** Implement TranscriptPanel component (container with scrolling)
-- [ ] **3.30** Implement TranscriptEntry component (speaker labels, text)
+- [x] **3.29** Implement TranscriptPanel component (container with scrolling)
+- [x] **3.30** Implement TranscriptEntry component (speaker labels, text)
 - [ ] **3.31** Implement CallStatus component (call state indicator)
 - [ ] **3.32** Implement useWebSocket hook (connection, reconnection, messages)
 - [ ] **3.33** Create App component (main UI)
