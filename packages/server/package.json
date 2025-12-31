@@ -8,7 +8,11 @@
     "build": "tsc",
     "test": "vitest",
     "lint": "eslint src",
-    "dev": "tsx watch src/index.ts"
+    "dev": "tsx watch src/cli.ts",
+    "start": "node dist/cli.js"
+  },
+  "bin": {
+    "tnt-server": "./dist/cli.js"
   },
   "dependencies": {
     "@tnt/core": "workspace:*",
