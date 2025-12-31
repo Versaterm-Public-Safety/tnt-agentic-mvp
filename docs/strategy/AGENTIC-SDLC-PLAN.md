@@ -194,6 +194,156 @@ Specifications are written to be AI-consumable:
 
 ---
 
+## 1.5 Planning Phase (REQUIRED BEFORE EXECUTION)
+
+Before any agent work begins, a **Planning Phase** MUST be completed to create a comprehensive task breakdown that tracks progress throughout the entire agentic workflow.
+
+### 1.5.1 Purpose
+
+The Planning Phase ensures:
+1. All work is decomposed into trackable tasks
+2. Progress can be monitored across agent transitions
+3. Dependencies between tasks are identified
+4. The workflow can be resumed from any point
+
+### 1.5.2 Planning Phase Execution
+
+When "Execute the plan" is triggered, the **first action** is to:
+
+1. **Read and analyze** `spec.md` and `constitution.md`
+2. **Generate** a comprehensive TODO list based on the MVP scope
+3. **Create** `docs/TODO.md` - the master task tracker
+4. **Validate** the TODO covers all acceptance criteria from the spec
+
+### 1.5.3 TODO.md Structure
+
+The TODO file (`docs/TODO.md`) follows this structure:
+
+```markdown
+# TnT MVP Implementation TODO
+
+> Master task tracker for the agentic SDLC workflow
+> 
+> **Status**: IN_PROGRESS | BLOCKED | COMPLETE
+> **Current Agent**: {agent name}
+> **Last Updated**: {timestamp}
+
+## Progress Summary
+- Total Tasks: X
+- Completed: Y  
+- In Progress: Z
+- Blocked: W
+
+## Phase 0: Planning ✅
+- [x] Read spec.md
+- [x] Read constitution.md
+- [x] Generate TODO list
+- [x] Validate coverage
+
+## Phase 1: Research Agent
+- [ ] Task 1.1: Decompose PRD into requirements
+- [ ] Task 1.2: Research technical approaches
+- [ ] Task 1.3: Create feature specification
+- [ ] Task 1.4: Write ADRs
+- [ ] Task 1.5: Create audit trail
+- [ ] Task 1.6: Create handoff document
+
+## Phase 2: Test Agent
+- [ ] Task 2.1: Create @tnt/core domain tests
+- [ ] Task 2.2: Create @tnt/transcription tests
+- [ ] Task 2.3: Create @tnt/server tests
+- [ ] Task 2.4: Create integration test structure
+- [ ] Task 2.5: Create audit trail
+- [ ] Task 2.6: Create handoff document
+
+## Phase 3: Implementation Agent
+- [ ] Task 3.1: Implement domain entities
+- [ ] Task 3.2: Implement transcription service
+- [ ] Task 3.3: Implement WebSocket server
+- [ ] Task 3.4: Implement React UI
+- [ ] Task 3.5: Pass all tests
+- [ ] Task 3.6: Create audit trail
+- [ ] Task 3.7: Create handoff document
+
+## Phase 4: Validation Agent
+- [ ] Task 4.1: Build requirements traceability matrix
+- [ ] Task 4.2: Run and verify all tests
+- [ ] Task 4.3: Verify acceptance criteria
+- [ ] Task 4.4: Create validation report
+- [ ] Task 4.5: Create handoff document
+
+## Phase 5: Security Agent
+- [ ] Task 5.1: Run dependency audit
+- [ ] Task 5.2: Check for secrets
+- [ ] Task 5.3: Review input validation
+- [ ] Task 5.4: Create threat model
+- [ ] Task 5.5: Create security report
+- [ ] Task 5.6: Create handoff document
+
+## Phase 6: Integration Agent
+- [ ] Task 6.1: Create E2E tests
+- [ ] Task 6.2: Verify cross-package integration
+- [ ] Task 6.3: Run smoke tests
+- [ ] Task 6.4: Update README
+- [ ] Task 6.5: Create integration report
+- [ ] Task 6.6: Create handoff document
+
+## Phase 7: Documentation Agent
+- [ ] Task 7.1: Verify README commands
+- [ ] Task 7.2: Verify API docs
+- [ ] Task 7.3: Verify ADRs current
+- [ ] Task 7.4: Create final report
+- [ ] Task 7.5: Mark workflow complete
+
+## Acceptance Criteria Checklist
+(From spec.md Section 4.0)
+
+### Core Transcription (4.1)
+- [ ] AC-4.1.1: Transcript appears in browser UI
+- [ ] AC-4.1.2: Caller and agent speech labeled
+- [ ] AC-4.1.3: Text appears within 2 seconds
+- [ ] AC-4.1.4: WER ≤ 20% (goal: 17%)
+
+### Language Detection (4.2) - Future
+- [ ] AC-4.2.1: Language detection >80% accuracy
+- [ ] AC-4.2.2: Detection within 8 seconds
+- [ ] AC-4.2.3: Visual indicator in UI
+
+## Success Criteria Checklist
+(From constitution.md)
+
+- [ ] TypeScript strict mode, no `any`
+- [ ] All tests passing
+- [ ] Coverage >80% for domain logic
+- [ ] No critical security vulnerabilities
+- [ ] All documentation accurate
+- [ ] All handoffs complete
+```
+
+### 1.5.4 TODO Updates During Execution
+
+**Each agent MUST**:
+1. **Read** `docs/TODO.md` at startup
+2. **Update** task status as work progresses
+3. **Check off** completed tasks
+4. **Add** any discovered tasks
+5. **Commit** TODO changes with other work
+
+**Update Format**:
+```markdown
+- [x] Task X.Y: Description _(completed {timestamp})_
+```
+
+### 1.5.5 Planning Phase Output
+
+The Planning Phase creates:
+1. `docs/TODO.md` - Master task tracker
+2. Initial commit: `[planning] chore: create master TODO for MVP implementation`
+
+After Planning Phase completes, execution proceeds automatically to Research Agent.
+
+---
+
 ## 2. Repository Structure
 
 ```
@@ -2047,6 +2197,8 @@ When the user says any of the following, execute the full agentic workflow:
 
 **Automatic Progression**:
 ```
+PLANNING PHASE (first!) → Create docs/TODO.md
+Planning completes → AUTOMATICALLY start Research Agent
 Research Agent completes → AUTOMATICALLY start Test Agent
 Test Agent completes → AUTOMATICALLY start Implementation Agent
 Implementation Agent completes → AUTOMATICALLY start Validation Agent
@@ -2055,6 +2207,13 @@ Security Agent completes → AUTOMATICALLY start Integration Agent
 Integration Agent completes → AUTOMATICALLY start Documentation Agent
 Documentation Agent completes → WORKFLOW COMPLETE
 ```
+
+**Planning Phase (ALWAYS FIRST)**:
+Before any agent runs, execute the Planning Phase (Section 1.5):
+1. Read `spec.md` and `constitution.md`
+2. Create `docs/TODO.md` with comprehensive task breakdown
+3. Commit: `[planning] chore: create master TODO for MVP implementation`
+4. Proceed automatically to Research Agent
 
 **When to Prompt User (ONLY these cases)**:
 | Situation | Action |
@@ -2151,7 +2310,8 @@ User interaction is ONLY required when blocked (see section 10.1.1).
 
 | Order | Agent | Trigger Condition | Output | Est. Duration |
 |-------|-------|-------------------|--------|---------------|
-| 1 | Research Agent | Fresh start OR no specs exist | Feature specs, ADRs | 30-60 min |
+| 0 | **Planning Phase** | Fresh start | `docs/TODO.md` | 5-10 min |
+| 1 | Research Agent | Planning complete OR no specs exist | Feature specs, ADRs | 30-60 min |
 | 2 | Test Agent | Research handoff exists | Unit tests, integration test structure | 45-90 min |
 | 3 | Implementation Agent | Test handoff exists | Production code passing tests | 60-120 min |
 | 4 | Validation Agent | Implementation handoff exists | Validation report | 20-40 min |
@@ -2165,10 +2325,11 @@ User interaction is ONLY required when blocked (see section 10.1.1).
 
 #### Starting Fresh (No Prior Work)
 
-1. **Check state**: `ls -la docs/handoffs/` - if empty, start with Research Agent
-2. **Announce**: "🤖 RESEARCH AGENT STARTING"
-3. **Read**: `tnt.prd` and `docs/strategy/AGENTIC-SDLC-PLAN.md`
-4. **Execute**: Agent tasks per section 3.1
+1. **Check state**: `ls -la docs/TODO.md` - if missing, start with Planning Phase
+2. **Planning Phase**: Create `docs/TODO.md` per Section 1.5
+3. **Announce**: "🤖 RESEARCH AGENT STARTING"
+4. **Read**: `spec.md` and `docs/strategy/AGENTIC-SDLC-PLAN.md`
+5. **Execute**: Agent tasks per section 3.1
 5. **Create outputs**: Feature spec, ADRs, audit trail, handoff document
 6. **Announce**: "✅ RESEARCH AGENT COMPLETE"
 7. **AUTOMATICALLY proceed** to next agent (no user prompt)
@@ -2200,6 +2361,40 @@ Each agent follows this pattern:
 | Security | 3.5 | Code | Security report |
 | Integration | 3.6 | All packages | E2E tests, README |
 | Documentation | 3.7 | All docs | Verified/updated docs |
+
+#### Planning Phase Execution (ALWAYS FIRST)
+```markdown
+═══════════════════════════════════════════════════════════════
+📋 PLANNING PHASE STARTING
+═══════════════════════════════════════════════════════════════
+
+## Objectives
+1. Read and analyze spec.md and constitution.md
+2. Decompose MVP into trackable tasks
+3. Create master TODO list
+4. Validate coverage of acceptance criteria
+
+## Required Reading
+- `spec.md` - Product Requirements Document
+- `constitution.md` - Project rules and principles
+- `docs/strategy/AGENTIC-SDLC-PLAN.md` - This plan (Section 1.5)
+
+## Actions
+1. Parse spec.md Section 4.0 (User Stories & Functional Requirements)
+2. Parse spec.md Section 5.0 (Success Metrics)
+3. Map requirements to agent phases
+4. Create comprehensive task breakdown
+5. Create docs/TODO.md
+
+## Outputs
+- [ ] docs/TODO.md created with all tasks
+- [ ] Acceptance criteria mapped to tasks
+- [ ] Success criteria included
+- [ ] Committed: [planning] chore: create master TODO
+
+## Completion
+When TODO.md is created and committed, AUTOMATICALLY proceed to Research Agent.
+```
 
 #### Research Agent Execution
 ```markdown
