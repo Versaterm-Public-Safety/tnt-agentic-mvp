@@ -26,28 +26,19 @@ export class WhisperTranscriptionService implements TranscriptionService {
 
     try {
       // Dynamic import of whisper-node (ESM module)
-      const { nodewhisper } = await import('whisper-node');
+      const whisperModule = await import('whisper-node');
+      const whisper = whisperModule.default || whisperModule;
 
-      // Configure Whisper
-      const whisper = await nodewhisper(wavPath, {
+      // Call Whisper
+      const result = await whisper(wavPath, {
         modelName: this.modelPath,
         autoDownloadModelName: this.modelPath,
-        whisperOptions: {
-          language: 'en',
-          word_timestamps: false,
-          gen_file_txt: false,
-          gen_file_subtitle: false,
-          gen_file_vtt: false,
-          timestamp_size: 0,
-        },
       });
 
       // Process transcription result
-      const transcriptionText = Array.isArray(whisper)
-        ? whisper.map((w) => w.speech).join(' ')
-        : typeof whisper === 'object' && 'speech' in whisper
-        ? whisper.speech
-        : String(whisper);
+      const transcriptionText = Array.isArray(result)
+        ? result.map((segment: any) => segment.speech).join(' ')
+        : String(result);
 
       // Calculate confidence (Whisper doesn't provide this directly)
       // In production, you'd analyze the word-level probabilities
