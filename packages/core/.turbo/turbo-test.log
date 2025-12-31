@@ -5,15 +5,15 @@
 
  RUN  v3.2.4 /Users/rmohid/Stash/learning/tnt-agentic-mvp/packages/core
 
- ✓ tests/speaker.test.ts (12 tests) 4ms
- ✓ tests/transcript.test.ts (15 tests) 6ms
+ ✓ tests/speaker.test.ts (12 tests) 2ms
+ ✓ tests/transcript.test.ts (15 tests) 3ms
 stderr | tests/call.test.ts > Call > lifecycle management > marks call as error status
 Call call-007 error: Connection lost
 
- ✓ tests/call.test.ts (16 tests) 4ms
+ ✓ tests/call.test.ts (16 tests) 6ms
 
  Test Files  3 passed (3)
       Tests  43 passed (43)
-   Start at  17:06:41
-   Duration  443ms (transform 148ms, setup 0ms, collect 228ms, tests 14ms, environment 0ms, prepare 459ms)
+   Start at  18:52:06
+   Duration  367ms (transform 170ms, setup 0ms, collect 258ms, tests 11ms, environment 0ms, prepare 207ms)
 

@@ -2,4 +2,13 @@
 > @tnt/ui@0.0.1 test /Users/rmohid/Stash/learning/tnt-agentic-mvp/packages/ui
 > vitest
 
- ELIFECYCLE  Test failed. See above for more details.
+
+ RUN  v3.2.4 /Users/rmohid/Stash/learning/tnt-agentic-mvp/packages/ui
+
+ ✓ tests/components.test.tsx (18 tests) 114ms
+
+ Test Files  1 passed (1)
+      Tests  18 passed (18)
+   Start at  18:52:06
+   Duration  1.82s (transform 83ms, setup 128ms, collect 227ms, tests 114ms, environment 986ms, prepare 54ms)
+

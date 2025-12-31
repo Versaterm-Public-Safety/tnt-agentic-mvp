@@ -10,7 +10,9 @@
     "lint": "eslint src"
   },
   "dependencies": {
-    "@tnt/core": "workspace:*"
+    "@tnt/core": "workspace:*",
+    "@types/node": "^25.0.3",
+    "sip.js": "^0.21.2"
   },
   "devDependencies": {
     "typescript": "^5.7.2",

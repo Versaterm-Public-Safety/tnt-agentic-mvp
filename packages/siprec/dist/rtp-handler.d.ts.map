@@ -1,0 +1,1 @@
+{"version":3,"file":"rtp-handler.d.ts","sourceRoot":"","sources":["../src/rtp-handler.ts"],"names":[],"mappings":"AACA,OAAO,EAAE,YAAY,EAAE,MAAM,QAAQ,CAAC;AAEtC,qBAAa,UAAW,SAAQ,YAAY;IAC1C,OAAO,CAAC,MAAM,CAAgB;IAE9B,YAAY,CAAC,MAAM,EAAE,MAAM,GAAG,IAAI;IAOlC,OAAO,CAAC,iBAAiB;IAmCzB,gBAAgB,IAAI,MAAM;CAK3B"}

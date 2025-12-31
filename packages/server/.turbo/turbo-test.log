@@ -1,0 +1,156 @@
+
+> @tnt/server@0.0.1 test /Users/rmohid/Stash/learning/tnt-agentic-mvp/packages/server
+> vitest
+
+
+ RUN  v3.2.4 /Users/rmohid/Stash/learning/tnt-agentic-mvp/packages/server
+
+ ✓ tests/protocol.test.ts (14 tests) 3ms
+stdout | tests/websocket-error-handling.test.ts > WebSocket Error Handling > handles invalid JSON messages gracefully
+WebSocket server listening on port 9999
+
+stdout | tests/websocket-error-handling.test.ts > WebSocket Error Handling > handles invalid JSON messages gracefully
+New WebSocket client connected
+
+stderr | tests/websocket-error-handling.test.ts > WebSocket Error Handling > handles invalid JSON messages gracefully
+Invalid message format: SyntaxError: Unexpected token 'i', "invalid json{{{" is not valid JSON
+    at JSON.parse (<anonymous>)
+    at WebSocket.<anonymous> [90m(/Users/rmohid/Stash/learning/tnt-agentic-mvp/packages/server/[39msrc/websocket-server.ts:91:30[90m)[39m
+[90m    at WebSocket.emit (node:events:508:28)[39m
+    at Receiver.receiverOnMessage (/Users/rmohid/Stash/learning/tnt-agentic-mvp/node_modules/[4m.pnpm[24m/ws@8.18.3/node_modules/[4mws[24m/lib/websocket.js:1220:20)
+[90m    at Receiver.emit (node:events:508:28)[39m
+    at Receiver.dataMessage (/Users/rmohid/Stash/learning/tnt-agentic-mvp/node_modules/[4m.pnpm[24m/ws@8.18.3/node_modules/[4mws[24m/lib/receiver.js:596:14)
+    at Receiver.getData (/Users/rmohid/Stash/learning/tnt-agentic-mvp/node_modules/[4m.pnpm[24m/ws@8.18.3/node_modules/[4mws[24m/lib/receiver.js:496:10)
+    at Receiver.startLoop (/Users/rmohid/Stash/learning/tnt-agentic-mvp/node_modules/[4m.pnpm[24m/ws@8.18.3/node_modules/[4mws[24m/lib/receiver.js:167:16)
+    at Receiver._write (/Users/rmohid/Stash/learning/tnt-agentic-mvp/node_modules/[4m.pnpm[24m/ws@8.18.3/node_modules/[4mws[24m/lib/receiver.js:94:10)
+[90m    at writeOrBuffer (node:internal/streams/writable:570:12)[39m
+
+stdout | tests/audio-router.test.ts > AudioRouter > processes audio chunk and broadcasts transcript
+Starting transcription for call call-123
+
+stdout | tests/audio-router.test.ts > AudioRouter > processes audio chunk and broadcasts transcript
+Transcription sent for call call-123: "Hello world"
+
+stdout | tests/audio-router.test.ts > AudioRouter > does not broadcast empty transcripts
+Starting transcription for call call-123
+
+stdout | tests/audio-router.test.ts > AudioRouter > handles transcription errors gracefully
+Starting transcription for call call-123
+
+stderr | tests/audio-router.test.ts > AudioRouter > handles transcription errors gracefully
+Transcription error for call call-123: Error: Transcription failed
+    at [90m/Users/rmohid/Stash/learning/tnt-agentic-mvp/packages/server/[39mtests/audio-router.test.ts:91:7
+    at file:///Users/rmohid/Stash/learning/tnt-agentic-mvp/node_modules/[4m.pnpm[24m/@vitest+runner@3.2.4/node_modules/[4m@vitest[24m/runner/dist/chunk-hooks.js:155:11
+    at file:///Users/rmohid/Stash/learning/tnt-agentic-mvp/node_modules/[4m.pnpm[24m/@vitest+runner@3.2.4/node_modules/[4m@vitest[24m/runner/dist/chunk-hooks.js:752:26
+    at file:///Users/rmohid/Stash/learning/tnt-agentic-mvp/node_modules/[4m.pnpm[24m/@vitest+runner@3.2.4/node_modules/[4m@vitest[24m/runner/dist/chunk-hooks.js:1897:20
+    at new Promise (<anonymous>)
+    at runWithTimeout (file:///Users/rmohid/Stash/learning/tnt-agentic-mvp/node_modules/[4m.pnpm[24m/@vitest+runner@3.2.4/node_modules/[4m@vitest[24m/runner/dist/chunk-hooks.js:1863:10)
+    at runTest (file:///Users/rmohid/Stash/learning/tnt-agentic-mvp/node_modules/[4m.pnpm[24m/@vitest+runner@3.2.4/node_modules/[4m@vitest[24m/runner/dist/chunk-hooks.js:1574:12)
+[90m    at processTicksAndRejections (node:internal/process/task_queues:105:5)[39m
+    at runSuite (file:///Users/rmohid/Stash/learning/tnt-agentic-mvp/node_modules/[4m.pnpm[24m/@vitest+runner@3.2.4/node_modules/[4m@vitest[24m/runner/dist/chunk-hooks.js:1729:8)
+    at runSuite (file:///Users/rmohid/Stash/learning/tnt-agentic-mvp/node_modules/[4m.pnpm[24m/@vitest+runner@3.2.4/node_modules/[4m@vitest[24m/runner/dist/chunk-hooks.js:1729:8)
+
+stdout | tests/audio-router.test.ts > AudioRouter > tracks active calls
+Starting transcription for call call-123
+
+stdout | tests/audio-router.test.ts > AudioRouter > tracks active calls
+Transcription sent for call call-123: "Test"
+
+stdout | tests/audio-router.test.ts > AudioRouter > ends call and broadcasts disconnection status
+Starting transcription for call call-123
+Ending transcription for call call-123
+Transcription sent for call call-123: "Test"
+
+stdout | tests/audio-router.test.ts > AudioRouter > processes multiple calls concurrently
+Starting transcription for call call-1
+Starting transcription for call call-2
+Transcription sent for call call-1: "Test"
+Transcription sent for call call-2: "Test"
+
+ ✓ tests/audio-router.test.ts (6 tests) 11ms
+stdout | tests/websocket-error-handling.test.ts > WebSocket Error Handling > handles invalid JSON messages gracefully
+WebSocket server stopped
+
+stdout | tests/websocket-error-handling.test.ts > WebSocket Error Handling > handles client disconnection cleanly
+WebSocket server listening on port 9999
+
+stdout | tests/websocket-error-handling.test.ts > WebSocket Error Handling > handles client disconnection cleanly
+Client disconnected
+
+stdout | tests/websocket-error-handling.test.ts > WebSocket Error Handling > handles client disconnection cleanly
+New WebSocket client connected
+
+stdout | tests/websocket-error-handling.test.ts > WebSocket Error Handling > handles client disconnection cleanly
+Client disconnected
+
+stdout | tests/websocket-error-handling.test.ts > WebSocket Error Handling > handles client disconnection cleanly
+WebSocket server stopped
+
+stdout | tests/websocket-error-handling.test.ts > WebSocket Error Handling > broadcasts to all connected clients
+WebSocket server listening on port 9999
+
+stdout | tests/websocket-error-handling.test.ts > WebSocket Error Handling > broadcasts to all connected clients
+New WebSocket client connected
+
+stdout | tests/websocket-error-handling.test.ts > WebSocket Error Handling > broadcasts to all connected clients
+New WebSocket client connected
+
+stdout | tests/websocket-error-handling.test.ts > WebSocket Error Handling > broadcasts to all connected clients
+Client disconnected
+
+stdout | tests/websocket-error-handling.test.ts > WebSocket Error Handling > broadcasts to all connected clients
+WebSocket server stopped
+
+stdout | tests/websocket-error-handling.test.ts > WebSocket Error Handling > handles server start error gracefully
+WebSocket server listening on port 9999
+
+stderr | tests/websocket-error-handling.test.ts > WebSocket Error Handling > handles server start error gracefully
+WebSocket server error: Error: listen EADDRINUSE: address already in use :::9999
+[90m    at Server.setupListenHandle [as _listen2] (node:net:1940:16)[39m
+[90m    at listenInCluster (node:net:1997:12)[39m
+[90m    at Server.listen (node:net:2102:7)[39m
+    at new WebSocketServer (/Users/rmohid/Stash/learning/tnt-agentic-mvp/node_modules/[4m.pnpm[24m/ws@8.18.3/node_modules/[4mws[24m/lib/websocket-server.js:102:20)
+    at [90m/Users/rmohid/Stash/learning/tnt-agentic-mvp/packages/server/[39msrc/websocket-server.ts:25:20
+    at new Promise (<anonymous>)
+    at TntWebSocketServer.start [90m(/Users/rmohid/Stash/learning/tnt-agentic-mvp/packages/server/[39msrc/websocket-server.ts:23:12[90m)[39m
+    at [90m/Users/rmohid/Stash/learning/tnt-agentic-mvp/packages/server/[39mtests/websocket-error-handling.test.ts:155:34
+[90m    at processTicksAndRejections (node:internal/process/task_queues:105:5)[39m
+    at file:///Users/rmohid/Stash/learning/tnt-agentic-mvp/node_modules/[4m.pnpm[24m/@vitest+runner@3.2.4/node_modules/[4m@vitest[24m/runner/dist/chunk-hooks.js:752:20 {
+  code: [32m'EADDRINUSE'[39m,
+  errno: [33m-48[39m,
+  syscall: [32m'listen'[39m,
+  address: [32m'::'[39m,
+  port: [33m9999[39m
+}
+
+stdout | tests/websocket-error-handling.test.ts > WebSocket Error Handling > handles server start error gracefully
+WebSocket server stopped
+
+stdout | tests/websocket-error-handling.test.ts > WebSocket Error Handling > can stop and restart server
+WebSocket server listening on port 9999
+
+stdout | tests/websocket-error-handling.test.ts > WebSocket Error Handling > can stop and restart server
+WebSocket server stopped
+
+stdout | tests/websocket-error-handling.test.ts > WebSocket Error Handling > can stop and restart server
+WebSocket server listening on port 9999
+
+stdout | tests/websocket-error-handling.test.ts > WebSocket Error Handling > can stop and restart server
+Client disconnected
+
+stdout | tests/websocket-error-handling.test.ts > WebSocket Error Handling > can stop and restart server
+New WebSocket client connected
+
+stdout | tests/websocket-error-handling.test.ts > WebSocket Error Handling > can stop and restart server
+WebSocket server stopped
+
+stdout | tests/websocket-error-handling.test.ts
+Client disconnected
+
+ ✓ tests/websocket-error-handling.test.ts (6 tests | 1 skipped) 358ms
+
+ Test Files  3 passed (3)
+      Tests  25 passed | 1 skipped (26)
+   Start at  18:52:09
+   Duration  980ms (transform 69ms, setup 0ms, collect 141ms, tests 372ms, environment 1ms, prepare 268ms)
+

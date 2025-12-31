@@ -1,0 +1,14 @@
+
+> @tnt/sbc-simulator@0.0.1 test /Users/rmohid/Stash/learning/tnt-agentic-mvp/packages/sbc-simulator
+> vitest
+
+
+ RUN  v3.2.4 /Users/rmohid/Stash/learning/tnt-agentic-mvp/packages/sbc-simulator
+
+ ✓ tests/simulator.test.ts (1 test) 1ms
+
+ Test Files  1 passed (1)
+      Tests  1 passed (1)
+   Start at  18:52:09
+   Duration  591ms (transform 23ms, setup 0ms, collect 23ms, tests 1ms, environment 0ms, prepare 84ms)
+

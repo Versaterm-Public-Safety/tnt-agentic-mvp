@@ -5,10 +5,57 @@
 
  RUN  v3.2.4 /Users/rmohid/Stash/learning/tnt-agentic-mvp/packages/transcription
 
- ✓ tests/transcription-service.test.ts (6 tests) 3ms
+ ✓ tests/transcription-service.test.ts (6 tests) 9ms
+stdout | tests/whisper-real-speech.test.ts > WhisperTranscriptionService - Real Speech > validates real speech audio file structure
 
- Test Files  1 passed (1)
-      Tests  6 passed (6)
-   Start at  17:06:42
-   Duration  478ms (transform 41ms, setup 0ms, collect 65ms, tests 3ms, environment 0ms, prepare 151ms)
+📁 Real Speech Audio Validated:
+   Format: 16-bit mono
+   Sample rate: 16000Hz (Whisper-compatible)
+   File size: 151470 bytes
+   Audio contains: "Emergency at 123 Main Street..."
+
+ ✓ tests/whisper-real-speech.test.ts (2 tests | 1 skipped) 3ms
+stdout | tests/whisper-integration.test.ts > WhisperTranscriptionService (Integration) > demonstrates audio buffer creation from WAV file
+📁 Test audio file validated:
+   Sample rate: 16000Hz
+   Channels: 1
+   Data size: 32000 bytes
+
+stdout | tests/whisper-multilingual.test.ts > WhisperTranscriptionService - Multilingual > validates all multilingual audio files exist and are properly formatted
+
+📁 Multilingual Audio Files:
+
+   Spanish:
+      File: emergency-spanish.wav
+      Size: 200522 bytes
+      Format: 16-bit mono @ 16kHz
+      Contains: "Emergencia en calle principal"
+
+   French:
+      File: emergency-french.wav
+      Size: 157832 bytes
+      Format: 16-bit mono @ 16kHz
+      Contains: "Urgence au rue principale"
+
+   Mandarin Chinese:
+      File: emergency-chinese.wav
+      Size: 4468 bytes
+      Format: 16-bit mono @ 16kHz
+      Contains: "紧急情况 (Real Mandarin)"
+
+✅ All multilingual audio files validated!
+
+ ✓ tests/whisper-multilingual.test.ts (4 tests | 3 skipped) 4ms
+stdout | tests/whisper-integration.test.ts > WhisperTranscriptionService (Integration) > creates valid audio buffer structure
+🎤 AudioBuffer structure validated:
+   Buffer size: 32000 bytes
+   Sample rate: 16000Hz
+   Duration: 1s
+
+ ✓ tests/whisper-integration.test.ts (3 tests | 1 skipped) 5ms
+
+ Test Files  4 passed (4)
+      Tests  10 passed | 5 skipped (15)
+   Start at  18:52:07
+   Duration  875ms (transform 183ms, setup 0ms, collect 608ms, tests 21ms, environment 0ms, prepare 835ms)
 

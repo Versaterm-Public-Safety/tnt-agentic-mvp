@@ -2,6 +2,7 @@ import { describe, it, expect } from 'vitest';
 import { render, screen } from '@testing-library/react';
 import { TranscriptPanel } from '../src/components/TranscriptPanel';
 import { TranscriptEntry } from '../src/components/TranscriptEntry';
+import { CallStatus } from '../src/components/CallStatus';
 
 describe('TranscriptPanel', () => {
   it('renders without transcripts (empty state)', () => {
@@ -206,3 +207,83 @@ describe('TranscriptEntry', () => {
     expect(screen.getByText(/12:34:56/)).toBeInTheDocument();
   });
 });
+
+describe('CallStatus', () => {
+  it('displays connected status', () => {
+    // Arrange & Act
+    render(<CallStatus status="connected" />);
+
+    // Assert
+    expect(screen.getByText(/connected/i)).toBeInTheDocument();
+  });
+
+  it('displays disconnected status', () => {
+    // Arrange & Act
+    render(<CallStatus status="disconnected" />);
+
+    // Assert
+    expect(screen.getByText(/disconnected/i)).toBeInTheDocument();
+  });
+
+  it('displays reconnecting status with attempt count', () => {
+    // Arrange & Act
+    render(<CallStatus status="reconnecting" reconnectAttempts={3} />);
+
+    // Assert
+    expect(screen.getByText(/reconnecting/i)).toBeInTheDocument();
+    expect(screen.getByText(/attempt 3/i)).toBeInTheDocument();
+  });
+
+  it('displays call ID when provided', () => {
+    // Arrange & Act
+    render(<CallStatus status="connected" callId="call-123" />);
+
+    // Assert
+    expect(screen.getByText(/call-123/i)).toBeInTheDocument();
+  });
+
+  it('displays error message when provided', () => {
+    // Arrange & Act
+    render(<CallStatus status="disconnected" error="Connection timeout" />);
+
+    // Assert
+    expect(screen.getByText(/connection timeout/i)).toBeInTheDocument();
+  });
+
+  it('shows green indicator for connected status', () => {
+    // Arrange & Act
+    const { container } = render(<CallStatus status="connected" />);
+
+    // Assert
+    const indicators = container.querySelectorAll('div');
+    const greenIndicator = Array.from(indicators).find(
+      (div) => div.style.backgroundColor === 'green'
+    );
+    expect(greenIndicator).toBeTruthy();
+  });
+
+  it('shows red indicator for disconnected status', () => {
+    // Arrange & Act
+    const { container } = render(<CallStatus status="disconnected" />);
+
+    // Assert
+    const indicators = container.querySelectorAll('div');
+    const redIndicator = Array.from(indicators).find(
+      (div) => div.style.backgroundColor === 'red'
+    );
+    expect(redIndicator).toBeTruthy();
+  });
+
+  it('shows orange indicator for reconnecting status', () => {
+    // Arrange & Act
+    const { container } = render(<CallStatus status="reconnecting" />);
+
+    // Assert
+    const indicators = container.querySelectorAll('div');
+    const orangeIndicator = Array.from(indicators).find(
+      (div) => div.style.backgroundColor === 'orange'
+    );
+    expect(orangeIndicator).toBeTruthy();
+  });
+});
+
