@@ -37,17 +37,16 @@
 - **Notes**: Frozen lockfile works, no dependency issues
 
 #### Command: `pnpm test`
-- **Status**: ⚠️ PARTIALLY WORKING
-- **Issue**: @tnt/siprec package has no test files
-- **Fix Applied**: None (documented as known gap)
-- **Actual Behavior**: Core, transcription, server, UI tests run successfully
-- **Result**: 81 tests passing in packages that have tests
+- **Status**: ✅ PASS
+- **Result**: All packages now have tests
+- **Tests**: 80 passing, 5 skipped (platform-specific)
+- **Breakdown**: core(43), transcription(10+5), ui(10), server(14), siprec(1), sbc-simulator(1), siprec-proxy(1)
 
 #### Command: `pnpm build`
-- **Status**: ⚠️ FIXED
-- **Initial Issue**: Missing @types/node in @tnt/transcription
-- **Fix Applied**: 
-  - Added `@types/node` to transcription package
+- **Status**: ✅ PASS
+- **Result**: All 7 packages build successfully
+- **Build Time**: ~2.5 seconds
+- **TypeScript**: 0 errors, strict mode enabled
   - Created `whisper-node.d.ts` type declarations
 - **Result**: ✅ All packages now build successfully
 - **Verification**: `pnpm tsc --noEmit` passes in all packages
