@@ -80,56 +80,87 @@ Build a functional MVP demonstrating real-time 9-1-1 call transcription that pro
 
 This project follows **GitHub Spec Kit** conventions for specification-driven development (SDD), ensuring specifications serve as the authoritative source of truth.
 
-### 1.4.1 Core Principles
+### 1.4.1 Spec Kit Installation
+
+**Prerequisites**: Python with `uv` tool installed
+
+```bash
+# Install specify-cli globally
+uv tool install specify-cli --from git+https://github.com/github/spec-kit.git
+
+# Or initialize directly in a project
+uvx --from git+https://github.com/github/spec-kit.git specify init .
+```
+
+### 1.4.2 Spec Kit Commands
+
+Use these slash commands with your AI agent (Copilot, Claude, etc.):
+
+| Command | Purpose | Agent Phase |
+|---------|---------|-------------|
+| `/speckit.constitution` | Define project rules and principles | Setup |
+| `/speckit.specify` | Describe features (focus on UX, not tech) | Research Agent |
+| `/speckit.clarify` | Resolve ambiguities and add constraints | Research Agent |
+| `/speckit.plan` | Define technical architecture choices | Research Agent |
+| `/speckit.tasks` | Generate implementation task breakdown | Test Agent |
+| `/speckit.implement` | Execute implementation | Implementation Agent |
+
+### 1.4.3 Core Principles
 
 **Specifications as Living Artifacts**:
 - Specs are dynamic, evolving documents coupled to the codebase
 - As requirements change, specs are updated first
 - Specs define "what" and "why" before "how"
 
-**Phase-Gated Development**:
-1. **Specify**: Define user needs, goals, constraints (Research Agent)
-2. **Plan**: Detail technical architecture (Research Agent ADRs)
-3. **Task**: Break down into atomic units (Test Agent)
-4. **Implement**: Write code (Implementation Agent)
-5. **Validate**: Verify against specs (Validation Agent)
-6. **Secure**: Security audit (Security Agent)
-7. **Integrate**: E2E validation (Integration Agent)
-8. **Document**: Ensure docs match reality (Documentation Agent)
+**Phase-Gated Development with Spec Kit**:
+1. **Constitution** (`/speckit.constitution`): Define rules (Setup)
+2. **Specify** (`/speckit.specify`): Define user needs, goals (Research Agent)
+3. **Clarify** (`/speckit.clarify`): Resolve ambiguities (Research Agent)
+4. **Plan** (`/speckit.plan`): Detail technical architecture (Research Agent)
+5. **Task** (`/speckit.tasks`): Break down into atomic units (Test Agent)
+6. **Implement** (`/speckit.implement`): Write code (Implementation Agent)
+7. **Validate**: Verify against specs (Validation Agent)
+8. **Secure**: Security audit (Security Agent)
+9. **Integrate**: E2E validation (Integration Agent)
+10. **Document**: Ensure docs match reality (Documentation Agent)
 
-### 1.4.2 Spec Kit File Structure
+### 1.4.4 Spec Kit File Structure
 
 ```
 tnt-agentic-mvp/
-├── spec.md (or tnt.prd)          # Master specification (single source of truth)
-├── constitution.md (planned)      # Technical principles, non-negotiables
+├── spec.md                        # Master specification (single source of truth)
+├── constitution.md                # Technical principles, non-negotiables
+├── plan.md                        # Technical plan (optional, can be in docs/)
 ├── specs/
 │   ├── features/                  # Feature-level specifications
 │   │   └── real-time-transcription.md
-│   └── tasks/                     # Granular task breakdowns (optional)
+│   └── tasks/                     # Granular task breakdowns (from /speckit.tasks)
 ├── docs/
 │   ├── architecture/              # ADRs (architecture decisions)
 │   ├── audit-trail/               # Agent work logs (traceability)
-│   └── handoffs/                  # Context transfer documents
-└── plan.md (this file)            # Technical plan and workflow
+│   ├── handoffs/                  # Context transfer documents
+│   └── strategy/                  # This plan document
+└── packages/                      # Implementation code
 ```
 
-### 1.4.3 Spec Kit Workflow Alignment
+### 1.4.5 Spec Kit Workflow Alignment
 
-| Spec Kit Phase | Agent | Output | Verification |
-|----------------|-------|--------|--------------|
-| **Specify** | Research Agent | Feature specs, ADRs | Spec completeness |
-| **Plan** | Research Agent | Technical architecture | ADR rationale |
-| **Task** | Test Agent | Unit tests (TDD) | Tests syntactically valid |
-| **Implement** | Implementation Agent | Production code | All tests pass |
-| **Validate** | Validation Agent | Gap analysis | Requirements met |
-| **Secure** | Security Agent | Vulnerability assessment | No critical vulns |
-| **Integrate** | Integration Agent | E2E tests | Full stack works |
-| **Document** | Documentation Agent | Updated docs | Docs match code |
+| Spec Kit Command | Agent | Output | Verification |
+|------------------|-------|--------|--------------|
+| `/speckit.constitution` | Setup | constitution.md | Rules defined |
+| `/speckit.specify` | Research Agent | Feature specs | Spec completeness |
+| `/speckit.clarify` | Research Agent | Clarified requirements | No ambiguities |
+| `/speckit.plan` | Research Agent | ADRs, architecture | ADR rationale |
+| `/speckit.tasks` | Test Agent | Task breakdown, tests | Tests valid |
+| `/speckit.implement` | Implementation Agent | Production code | All tests pass |
+| (validation) | Validation Agent | Gap analysis | Requirements met |
+| (security) | Security Agent | Vulnerability assessment | No critical vulns |
+| (integration) | Integration Agent | E2E tests | Full stack works |
+| (documentation) | Documentation Agent | Updated docs | Docs match code |
 
-### 1.4.4 Constitution (Technical Principles)
+### 1.4.6 Constitution (Technical Principles)
 
-**Non-Negotiable Rules**:
+**Non-Negotiable Rules** (defined in `constitution.md`):
 1. **Type Safety**: TypeScript strict mode, no `any` types
 2. **Testing**: TDD approach, behavior over implementation
 3. **Clean Code**: SOLID principles, meaningful names, small functions
@@ -144,7 +175,7 @@ tnt-agentic-mvp/
 - Clear boundaries (domain, server, UI)
 - RFC compliance (WebSocket, SIPREC when implemented)
 
-### 1.4.5 Spec-to-Code Traceability
+### 1.4.7 Spec-to-Code Traceability
 
 Every code artifact traces back to specification:
 - **Code** → Test → Spec → ADR → PRD
@@ -152,7 +183,7 @@ Every code artifact traces back to specification:
 - **WebSocket Messages** → Feature Spec Section 6 → ADR-002
 - **Validation Logic** → Test → Feature Spec Acceptance Criteria
 
-### 1.4.6 AI Agent Context
+### 1.4.8 AI Agent Context
 
 Specifications are written to be AI-consumable:
 - Clear, actionable language
@@ -607,7 +638,22 @@ Each agent creates/updates: `docs/audit-trail/{date}-{agent}-{feature}.md`
 
 **Purpose**: Analyze requirements deeply, research implementation approaches with evidence, create actionable specifications that enable TDD.
 
-**Startup**: Read `tnt.prd` and `constitution.md` FIRST
+**Startup**: Read `spec.md` (or `tnt.prd`) and `constitution.md` FIRST
+
+#### 3.1.0 Spec Kit Commands (Research Agent)
+
+The Research Agent uses these spec-kit commands:
+
+```bash
+# 1. Define/verify the specification
+/speckit.specify Build a real-time transcription display for 9-1-1 calls with speaker identification and latency under 2 seconds
+
+# 2. Clarify any ambiguities found
+/speckit.clarify What happens when audio drops? Define retry behavior and graceful degradation
+
+# 3. Create the technical plan
+/speckit.plan Use TypeScript monorepo with Turborepo, WebSocket for real-time transport, Whisper.cpp for local transcription
+```
 
 #### 3.1.1 Research Methodology
 
@@ -734,6 +780,23 @@ Each ADR must have:
 **Purpose**: Derive comprehensive tests directly from specifications using systematic test design techniques - not just "write some tests."
 
 **Startup**: Read `docs/handoffs/{date}-research-to-test.md` FIRST
+
+#### 3.2.0 Spec Kit Commands (Test Agent)
+
+The Test Agent uses the spec-kit tasks command to generate implementation tasks:
+
+```bash
+# Generate tasks from the specification
+/speckit.tasks Generate test tasks for the real-time transcription feature based on acceptance criteria
+
+# Example output structure:
+# - Task 1: Create Transcript entity tests (validation, creation, immutability)
+# - Task 2: Create Call entity tests (lifecycle, transcript association)
+# - Task 3: Create WebSocket message contract tests
+# - Task 4: Create integration test structure
+```
+
+The tasks command helps break down the specification into atomic, testable units that follow TDD principles.
 
 #### 3.2.1 Test Derivation Methodology
 
@@ -862,6 +925,21 @@ describe('Transcript', () => {
 **Purpose**: Implement production code that passes all tests while following architectural patterns and clean code principles - not just "make tests green."
 
 **Startup**: Read `docs/handoffs/{date}-test-to-implement.md` FIRST
+
+#### 3.3.0 Spec Kit Commands (Implementation Agent)
+
+The Implementation Agent uses the spec-kit implement command:
+
+```bash
+# Execute implementation based on tasks and tests
+/speckit.implement Implement the Transcript entity following TDD - make all transcript tests pass
+
+# The implement command ensures:
+# - Code follows the specification
+# - Tests guide the implementation
+# - Clean Code principles are applied
+# - Constitution rules are followed
+```
 
 #### 3.3.1 Implementation Strategy
 

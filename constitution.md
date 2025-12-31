@@ -1,8 +1,21 @@
-# Technical Constitution
+# Constitution
 
-**Project**: TnT (Transcription and Translation) MVP  
-**Purpose**: Define non-negotiable technical principles for all contributors (human and AI)  
-**Authority**: All code must comply with this constitution
+> This constitution defines the non-negotiable rules and principles for the TnT (Transcription and Translation) MVP project. All human and AI contributors must follow these rules.
+
+## Project Identity
+
+- **Name**: TnT (Transcription and Translation) MVP
+- **Approach**: Specification-Driven Development (SDD) with Agentic SDLC
+- **Philosophy**: Library-First, Test-Driven Development, Clean Code
+
+## Core Principles
+
+1. **Specifications are the source of truth** - Code follows specs, not the other way around
+2. **TDD is mandatory** - Tests are written before implementation
+3. **Type safety is non-negotiable** - TypeScript strict mode, no `any` types
+4. **Clean Code principles apply** - SOLID, meaningful names, small functions
+5. **Security by design** - Input validation, no secrets in code, no eval()
+6. **Auditability is required** - Every decision documented, every change logged
 
 ---
 
@@ -270,6 +283,34 @@ function process(data: { value: string }): string {
 1. Be documented in an ADR
 2. Include justification and alternatives considered
 3. Be approved by project lead (or in this case, explicitly noted in audit trail)
+
+---
+
+---
+
+## Spec-Kit Integration
+
+This project uses GitHub Spec Kit for specification-driven development. The following slash commands are used:
+
+| Command | Purpose | When to Use |
+|---------|---------|-------------|
+| `/speckit.constitution` | Define project rules | At project start, to establish principles |
+| `/speckit.specify` | Describe features (user experience focus) | When defining what to build |
+| `/speckit.clarify` | Resolve ambiguities | When requirements are unclear |
+| `/speckit.plan` | Technical architecture choices | Before implementation |
+| `/speckit.tasks` | Generate implementation tasks | After specification is complete |
+| `/speckit.implement` | Execute implementation | When ready to build |
+
+### Spec-Kit Workflow
+
+```
+1. Constitution (/speckit.constitution) → Define rules
+2. Specify (/speckit.specify) → Describe features  
+3. Clarify (/speckit.clarify) → Resolve ambiguities
+4. Plan (/speckit.plan) → Technical decisions
+5. Tasks (/speckit.tasks) → Generate task list
+6. Implement (/speckit.implement) → Build the feature
+```
 
 ---
 
