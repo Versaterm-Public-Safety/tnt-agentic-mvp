@@ -27,7 +27,7 @@ export class WhisperTranscriptionService implements TranscriptionService {
     try {
       // Dynamic import of whisper-node (ESM module)
       const whisperModule = await import('whisper-node');
-      const whisper = whisperModule.default || whisperModule;
+      const whisper = 'default' in whisperModule ? whisperModule.default : whisperModule;
 
       // Call Whisper
       const result = await whisper(wavPath, {
@@ -36,8 +36,11 @@ export class WhisperTranscriptionService implements TranscriptionService {
       });
 
       // Process transcription result
+      interface WhisperSegment {
+        speech: string;
+      }
       const transcriptionText = Array.isArray(result)
-        ? result.map((segment: any) => segment.speech).join(' ')
+        ? result.map((segment: WhisperSegment) => segment.speech).join(' ')
         : String(result);
 
       // Calculate confidence (Whisper doesn't provide this directly)
@@ -70,7 +73,7 @@ export class WhisperTranscriptionService implements TranscriptionService {
     wavData.set(wavHeader, 0);
     wavData.set(new Uint8Array(audio.data), wavHeader.length);
 
-    const tempPath = path.join(this.tempDir, `audio-${Date.now()}.wav`);
+    const tempPath = path.join(this.tempDir, `audio-${Date.now().toString()}.wav`);
     await writeFile(tempPath, Buffer.from(wavData));
 
     return tempPath;
@@ -122,7 +125,7 @@ export class WhisperTranscriptionService implements TranscriptionService {
   }
 
   private generateId(): string {
-    return `transcript-${Date.now()}-${Math.random().toString(36).substring(7)}`;
+    return `transcript-${Date.now().toString()}-${Math.random().toString(36).substring(7)}`;
   }
 
   private async cleanupTempFile(filePath: string): Promise<void> {

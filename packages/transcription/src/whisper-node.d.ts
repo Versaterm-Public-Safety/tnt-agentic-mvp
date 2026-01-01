@@ -5,7 +5,7 @@ declare module 'whisper-node' {
     whisperOptions?: {
       language?: string;
       word_timestamps?: boolean;
-      [key: string]: any;
+      [key: string]: unknown;
     };
   }
 

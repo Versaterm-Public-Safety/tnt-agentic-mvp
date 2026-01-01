@@ -5,10 +5,10 @@
 
  RUN  v3.2.4 /Users/rmohid/Stash/learning/tnt-agentic-mvp/packages/siprec-proxy
 
- ✓ tests/proxy.test.ts (1 test) 1ms
+ ✓ tests/proxy.test.ts (1 test) 2ms
 
  Test Files  1 passed (1)
       Tests  1 passed (1)
-   Start at  18:52:09
-   Duration  597ms (transform 28ms, setup 0ms, collect 23ms, tests 1ms, environment 0ms, prepare 193ms)
+   Start at  19:16:46
+   Duration  338ms (transform 51ms, setup 0ms, collect 24ms, tests 2ms, environment 0ms, prepare 122ms)
 

@@ -1,0 +1,55 @@
+# TNT Transcription Service - Docker Image
+FROM node:20-alpine AS base
+
+# Install pnpm
+RUN npm install -g pnpm@9
+
+# Set working directory
+WORKDIR /app
+
+# Copy package files
+COPY package.json pnpm-workspace.yaml pnpm-lock.yaml turbo.json tsconfig.base.json ./
+COPY packages/core/package.json ./packages/core/
+COPY packages/transcription/package.json ./packages/transcription/
+COPY packages/siprec/package.json ./packages/siprec/
+COPY packages/siprec-proxy/package.json ./packages/siprec-proxy/
+COPY packages/server/package.json ./packages/server/
+
+# Install dependencies
+RUN pnpm install --frozen-lockfile
+
+# Copy source code
+COPY packages/core ./packages/core
+COPY packages/transcription ./packages/transcription
+COPY packages/siprec ./packages/siprec
+COPY packages/siprec-proxy ./packages/siprec-proxy
+COPY packages/server ./packages/server
+
+# Build packages
+RUN pnpm build
+
+# Production stage
+FROM node:20-alpine
+
+# Install pnpm
+RUN npm install -g pnpm@9
+
+WORKDIR /app
+
+# Copy package files
+COPY package.json pnpm-workspace.yaml ./
+COPY --from=base /app/packages ./packages
+COPY --from=base /app/node_modules ./node_modules
+
+# Expose ports
+# 3001: SIPREC proxy WebSocket
+# 3002: Transcription service
+# 5060: SIPREC SIP
+EXPOSE 3001 3002 5060
+
+# Health check
+HEALTHCHECK --interval=30s --timeout=10s --start-period=40s --retries=3 \
+  CMD node -e "require('http').get('http://localhost:3002/health', (r) => { process.exit(r.statusCode === 200 ? 0 : 1); });"
+
+# Start transcription service
+CMD ["pnpm", "run", "--filter", "@tnt/transcription", "start"]

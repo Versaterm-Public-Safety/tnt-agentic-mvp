@@ -5,7 +5,6 @@
 
  RUN  v3.2.4 /Users/rmohid/Stash/learning/tnt-agentic-mvp/packages/transcription
 
- ✓ tests/transcription-service.test.ts (6 tests) 9ms
 stdout | tests/whisper-real-speech.test.ts > WhisperTranscriptionService - Real Speech > validates real speech audio file structure
 
 📁 Real Speech Audio Validated:
@@ -14,13 +13,20 @@ stdout | tests/whisper-real-speech.test.ts > WhisperTranscriptionService - Real 
    File size: 151470 bytes
    Audio contains: "Emergency at 123 Main Street..."
 
- ✓ tests/whisper-real-speech.test.ts (2 tests | 1 skipped) 3ms
+ ✓ tests/whisper-real-speech.test.ts (2 tests | 1 skipped) 46ms
 stdout | tests/whisper-integration.test.ts > WhisperTranscriptionService (Integration) > demonstrates audio buffer creation from WAV file
 📁 Test audio file validated:
    Sample rate: 16000Hz
    Channels: 1
    Data size: 32000 bytes
 
+stdout | tests/whisper-integration.test.ts > WhisperTranscriptionService (Integration) > creates valid audio buffer structure
+🎤 AudioBuffer structure validated:
+   Buffer size: 32000 bytes
+   Sample rate: 16000Hz
+   Duration: 1s
+
+ ✓ tests/whisper-integration.test.ts (3 tests | 1 skipped) 5ms
 stdout | tests/whisper-multilingual.test.ts > WhisperTranscriptionService - Multilingual > validates all multilingual audio files exist and are properly formatted
 
 📁 Multilingual Audio Files:
@@ -45,17 +51,11 @@ stdout | tests/whisper-multilingual.test.ts > WhisperTranscriptionService - Mult
 
 ✅ All multilingual audio files validated!
 
- ✓ tests/whisper-multilingual.test.ts (4 tests | 3 skipped) 4ms
-stdout | tests/whisper-integration.test.ts > WhisperTranscriptionService (Integration) > creates valid audio buffer structure
-🎤 AudioBuffer structure validated:
-   Buffer size: 32000 bytes
-   Sample rate: 16000Hz
-   Duration: 1s
-
- ✓ tests/whisper-integration.test.ts (3 tests | 1 skipped) 5ms
+ ✓ tests/whisper-multilingual.test.ts (4 tests | 3 skipped) 7ms
+ ✓ tests/transcription-service.test.ts (6 tests) 52ms
 
  Test Files  4 passed (4)
       Tests  10 passed | 5 skipped (15)
-   Start at  18:52:07
-   Duration  875ms (transform 183ms, setup 0ms, collect 608ms, tests 21ms, environment 0ms, prepare 835ms)
+   Start at  19:16:44
+   Duration  1.02s (transform 139ms, setup 0ms, collect 306ms, tests 110ms, environment 0ms, prepare 911ms)
 

@@ -5,7 +5,50 @@
 
  RUN  v3.2.4 /Users/rmohid/Stash/learning/tnt-agentic-mvp/packages/server
 
- ✓ tests/protocol.test.ts (14 tests) 3ms
+stdout | tests/audio-router.test.ts > AudioRouter > processes audio chunk and broadcasts transcript
+Starting transcription for call call-123
+
+stdout | tests/audio-router.test.ts > AudioRouter > processes audio chunk and broadcasts transcript
+Transcription sent for call call-123: "Hello world"
+
+stdout | tests/audio-router.test.ts > AudioRouter > does not broadcast empty transcripts
+Starting transcription for call call-123
+
+stdout | tests/audio-router.test.ts > AudioRouter > handles transcription errors gracefully
+Starting transcription for call call-123
+
+stderr | tests/audio-router.test.ts > AudioRouter > handles transcription errors gracefully
+stdout | tests/audio-router.test.ts > AudioRouter > tracks active calls
+Transcription error for call call-123: Error: Transcription failed
+    at [90m/Users/rmohid/Stash/learning/tnt-agentic-mvp/packages/server/[39mtests/audio-router.test.ts:91:7
+Starting transcription for call call-123
+
+    at file:///Users/rmohid/Stash/learning/tnt-agentic-mvp/node_modules/[4m.pnpm[24m/@vitest+runner@3.2.4/node_modules/[4m@vitest[24m/runner/dist/chunk-hooks.js:155:11
+stdout | tests/audio-router.test.ts > AudioRouter > tracks active calls
+Transcription sent for call call-123: "Test"
+
+    at file:///Users/rmohid/Stash/learning/tnt-agentic-mvp/node_modules/[4m.pnpm[24m/@vitest+runner@3.2.4/node_modules/[4m@vitest[24m/runner/dist/chunk-hooks.js:752:26
+    at file:///Users/rmohid/Stash/learning/tnt-agentic-mvp/node_modules/[4m.pnpm[24m/@vitest+runner@3.2.4/node_modules/[4m@vitest[24m/runner/dist/chunk-hooks.js:1897:20
+    at new Promise (<anonymous>)
+    at runWithTimeout (file:///Users/rmohid/Stash/learning/tnt-agentic-mvp/node_modules/[4m.pnpm[24m/@vitest+runner@3.2.4/node_modules/[4m@vitest[24m/runner/dist/chunk-hooks.js:1863:10)
+    at runTest (file:///Users/rmohid/Stash/learning/tnt-agentic-mvp/node_modules/[4m.pnpm[24m/@vitest+runner@3.2.4/node_modules/[4m@vitest[24m/runner/dist/chunk-hooks.js:1574:12)
+[90m    at processTicksAndRejections (node:internal/process/task_queues:105:5)[39m
+    at runSuite (file:///Users/rmohid/Stash/learning/tnt-agentic-mvp/node_modules/[4m.pnpm[24m/@vitest+runner@3.2.4/node_modules/[4m@vitest[24m/runner/dist/chunk-hooks.js:1729:8)
+    at runSuite (file:///Users/rmohid/Stash/learning/tnt-agentic-mvp/node_modules/[4m.pnpm[24m/@vitest+runner@3.2.4/node_modules/[4m@vitest[24m/runner/dist/chunk-hooks.js:1729:8)
+
+stdout | tests/audio-router.test.ts > AudioRouter > ends call and broadcasts disconnection status
+Starting transcription for call call-123
+Ending transcription for call call-123
+Transcription sent for call call-123: "Test"
+
+stdout | tests/audio-router.test.ts > AudioRouter > processes multiple calls concurrently
+Starting transcription for call call-1
+Starting transcription for call call-2
+Transcription sent for call call-1: "Test"
+Transcription sent for call call-2: "Test"
+
+ ✓ tests/audio-router.test.ts (6 tests) 14ms
+ ✓ tests/protocol.test.ts (14 tests) 2ms
 stdout | tests/websocket-error-handling.test.ts > WebSocket Error Handling > handles invalid JSON messages gracefully
 WebSocket server listening on port 9999
 
@@ -25,49 +68,6 @@ Invalid message format: SyntaxError: Unexpected token 'i', "invalid json{{{" is 
     at Receiver._write (/Users/rmohid/Stash/learning/tnt-agentic-mvp/node_modules/[4m.pnpm[24m/ws@8.18.3/node_modules/[4mws[24m/lib/receiver.js:94:10)
 [90m    at writeOrBuffer (node:internal/streams/writable:570:12)[39m
 
-stdout | tests/audio-router.test.ts > AudioRouter > processes audio chunk and broadcasts transcript
-Starting transcription for call call-123
-
-stdout | tests/audio-router.test.ts > AudioRouter > processes audio chunk and broadcasts transcript
-Transcription sent for call call-123: "Hello world"
-
-stdout | tests/audio-router.test.ts > AudioRouter > does not broadcast empty transcripts
-Starting transcription for call call-123
-
-stdout | tests/audio-router.test.ts > AudioRouter > handles transcription errors gracefully
-Starting transcription for call call-123
-
-stderr | tests/audio-router.test.ts > AudioRouter > handles transcription errors gracefully
-Transcription error for call call-123: Error: Transcription failed
-    at [90m/Users/rmohid/Stash/learning/tnt-agentic-mvp/packages/server/[39mtests/audio-router.test.ts:91:7
-    at file:///Users/rmohid/Stash/learning/tnt-agentic-mvp/node_modules/[4m.pnpm[24m/@vitest+runner@3.2.4/node_modules/[4m@vitest[24m/runner/dist/chunk-hooks.js:155:11
-    at file:///Users/rmohid/Stash/learning/tnt-agentic-mvp/node_modules/[4m.pnpm[24m/@vitest+runner@3.2.4/node_modules/[4m@vitest[24m/runner/dist/chunk-hooks.js:752:26
-    at file:///Users/rmohid/Stash/learning/tnt-agentic-mvp/node_modules/[4m.pnpm[24m/@vitest+runner@3.2.4/node_modules/[4m@vitest[24m/runner/dist/chunk-hooks.js:1897:20
-    at new Promise (<anonymous>)
-    at runWithTimeout (file:///Users/rmohid/Stash/learning/tnt-agentic-mvp/node_modules/[4m.pnpm[24m/@vitest+runner@3.2.4/node_modules/[4m@vitest[24m/runner/dist/chunk-hooks.js:1863:10)
-    at runTest (file:///Users/rmohid/Stash/learning/tnt-agentic-mvp/node_modules/[4m.pnpm[24m/@vitest+runner@3.2.4/node_modules/[4m@vitest[24m/runner/dist/chunk-hooks.js:1574:12)
-[90m    at processTicksAndRejections (node:internal/process/task_queues:105:5)[39m
-    at runSuite (file:///Users/rmohid/Stash/learning/tnt-agentic-mvp/node_modules/[4m.pnpm[24m/@vitest+runner@3.2.4/node_modules/[4m@vitest[24m/runner/dist/chunk-hooks.js:1729:8)
-    at runSuite (file:///Users/rmohid/Stash/learning/tnt-agentic-mvp/node_modules/[4m.pnpm[24m/@vitest+runner@3.2.4/node_modules/[4m@vitest[24m/runner/dist/chunk-hooks.js:1729:8)
-
-stdout | tests/audio-router.test.ts > AudioRouter > tracks active calls
-Starting transcription for call call-123
-
-stdout | tests/audio-router.test.ts > AudioRouter > tracks active calls
-Transcription sent for call call-123: "Test"
-
-stdout | tests/audio-router.test.ts > AudioRouter > ends call and broadcasts disconnection status
-Starting transcription for call call-123
-Ending transcription for call call-123
-Transcription sent for call call-123: "Test"
-
-stdout | tests/audio-router.test.ts > AudioRouter > processes multiple calls concurrently
-Starting transcription for call call-1
-Starting transcription for call call-2
-Transcription sent for call call-1: "Test"
-Transcription sent for call call-2: "Test"
-
- ✓ tests/audio-router.test.ts (6 tests) 11ms
 stdout | tests/websocket-error-handling.test.ts > WebSocket Error Handling > handles invalid JSON messages gracefully
 WebSocket server stopped
 
@@ -147,10 +147,10 @@ WebSocket server stopped
 stdout | tests/websocket-error-handling.test.ts
 Client disconnected
 
- ✓ tests/websocket-error-handling.test.ts (6 tests | 1 skipped) 358ms
+ ✓ tests/websocket-error-handling.test.ts (6 tests | 1 skipped) 336ms
 
  Test Files  3 passed (3)
       Tests  25 passed | 1 skipped (26)
-   Start at  18:52:09
-   Duration  980ms (transform 69ms, setup 0ms, collect 141ms, tests 372ms, environment 1ms, prepare 268ms)
+   Start at  19:16:47
+   Duration  909ms (transform 85ms, setup 0ms, collect 167ms, tests 352ms, environment 0ms, prepare 386ms)
 

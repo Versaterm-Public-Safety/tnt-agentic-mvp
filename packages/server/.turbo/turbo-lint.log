@@ -1,0 +1,58 @@
+
+> @tnt/server@0.0.1 lint /Users/rmohid/Stash/learning/tnt-agentic-mvp/packages/server
+> eslint src
+
+(node:10911) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file:///Users/rmohid/Stash/learning/tnt-agentic-mvp/eslint.config.js?mtime=1767216895532 is not specified and it doesn't parse as CommonJS.
+Reparsing as ES module because module syntax was detected. This incurs a performance overhead.
+To eliminate this warning, add "type": "module" to /Users/rmohid/Stash/learning/tnt-agentic-mvp/package.json.
+(Use `node --trace-warnings ...` to show where the warning was created)
+
+/Users/rmohid/Stash/learning/tnt-agentic-mvp/packages/server/src/audio-router.ts
+  51:25  error  Unnecessary conditional, expected left-hand side of `??` operator to be possibly null or undefined  @typescript-eslint/no-unnecessary-condition
+  85:25  error  Invalid type "number" of template literal expression                                                @typescript-eslint/restrict-template-expressions
+  85:75  error  `substr` is deprecated. A legacy feature for browser compatibility                                  @typescript-eslint/no-deprecated
+
+/Users/rmohid/Stash/learning/tnt-agentic-mvp/packages/server/src/cli.ts
+  16:22  error  Promise returned in function argument where a void return was expected  @typescript-eslint/no-misused-promises
+  22:23  error  Promise returned in function argument where a void return was expected  @typescript-eslint/no-misused-promises
+  28:23  error  Prefer the safe `: unknown` for a `catch` callback variable             @typescript-eslint/use-unknown-in-catch-callback-variable
+
+/Users/rmohid/Stash/learning/tnt-agentic-mvp/packages/server/src/protocol.ts
+  30:9   error  Unsafe assignment of an `any` value                 @typescript-eslint/no-unsafe-assignment
+  30:20  error  Unexpected any. Specify a different type            @typescript-eslint/no-explicit-any
+  32:8   error  Unsafe member access .type on an `any` value        @typescript-eslint/no-unsafe-member-access
+  33:15  error  Unsafe member access .callId on an `any` value      @typescript-eslint/no-unsafe-member-access
+  34:15  error  Unsafe member access .transcript on an `any` value  @typescript-eslint/no-unsafe-member-access
+  35:15  error  Unsafe member access .transcript on an `any` value  @typescript-eslint/no-unsafe-member-access
+  36:9   error  Unsafe member access .transcript on an `any` value  @typescript-eslint/no-unsafe-member-access
+  36:48  error  Unsafe member access .transcript on an `any` value  @typescript-eslint/no-unsafe-member-access
+  37:15  error  Unsafe member access .transcript on an `any` value  @typescript-eslint/no-unsafe-member-access
+  38:15  error  Unsafe member access .transcript on an `any` value  @typescript-eslint/no-unsafe-member-access
+  39:15  error  Unsafe member access .transcript on an `any` value  @typescript-eslint/no-unsafe-member-access
+  44:9   error  Unsafe assignment of an `any` value                 @typescript-eslint/no-unsafe-assignment
+  44:20  error  Unexpected any. Specify a different type            @typescript-eslint/no-explicit-any
+  46:8   error  Unsafe member access .type on an `any` value        @typescript-eslint/no-unsafe-member-access
+  47:15  error  Unsafe member access .code on an `any` value        @typescript-eslint/no-unsafe-member-access
+  48:15  error  Unsafe member access .message on an `any` value     @typescript-eslint/no-unsafe-member-access
+  49:15  error  Unsafe member access .timestamp on an `any` value   @typescript-eslint/no-unsafe-member-access
+  54:9   error  Unsafe assignment of an `any` value                 @typescript-eslint/no-unsafe-assignment
+  54:20  error  Unexpected any. Specify a different type            @typescript-eslint/no-explicit-any
+  56:8   error  Unsafe member access .type on an `any` value        @typescript-eslint/no-unsafe-member-access
+  57:9   error  Unsafe member access .status on an `any` value      @typescript-eslint/no-unsafe-member-access
+  57:38  error  Unsafe member access .status on an `any` value      @typescript-eslint/no-unsafe-member-access
+  57:70  error  Unsafe member access .status on an `any` value      @typescript-eslint/no-unsafe-member-access
+
+/Users/rmohid/Stash/learning/tnt-agentic-mvp/packages/server/src/server.ts
+  41:55  error    Invalid type "number" of template literal expression  @typescript-eslint/restrict-template-expressions
+  59:3   warning  Missing return type on function                       @typescript-eslint/explicit-function-return-type
+
+/Users/rmohid/Stash/learning/tnt-agentic-mvp/packages/server/src/websocket-server.ts
+   36:61  error  Invalid type "number" of template literal expression                                              @typescript-eslint/restrict-template-expressions
+   46:9   error  Expected the Promise rejection reason to be an Error                                              @typescript-eslint/prefer-promise-reject-errors
+   66:9   error  Forbidden non-null assertion                                                                      @typescript-eslint/no-non-null-assertion
+  146:13  error  This expression unnecessarily compares a boolean value to a boolean instead of using it directly  @typescript-eslint/no-unnecessary-boolean-literal-compare
+
+✖ 35 problems (34 errors, 1 warning)
+  1 error and 0 warnings potentially fixable with the `--fix` option.
+
+ ELIFECYCLE  Command failed with exit code 1.

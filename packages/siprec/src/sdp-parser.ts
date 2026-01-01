@@ -5,7 +5,7 @@ export class SDPParser {
     const streams: RTPStream[] = [];
     const lines = sdpText.split('\n');
     
-    let currentMediaSection: { codec?: string; sampleRate?: number; channels?: number } = {};
+    const currentMediaSection: { codec?: string; sampleRate?: number; channels?: number } = {};
     let payloadType: number | undefined;
     
     for (const line of lines) {

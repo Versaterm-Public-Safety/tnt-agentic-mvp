@@ -1,0 +1,80 @@
+version: '3.8'
+
+services:
+  # SIPREC Proxy - Routes audio from SBC to transcription service
+  siprec-proxy:
+    build:
+      context: .
+      dockerfile: Dockerfile.transcription
+    container_name: tnt-siprec-proxy
+    command: ["pnpm", "run", "--filter", "@tnt/siprec-proxy", "start"]
+    ports:
+      - "5060:5060/udp"  # SIP SIPREC
+      - "3001:3001"      # WebSocket to transcription
+    environment:
+      - NODE_ENV=production
+      - SIPREC_PORT=5060
+      - WS_PORT=3001
+    networks:
+      - tnt-network
+    restart: unless-stopped
+
+  # Transcription Service - Whisper.cpp processing
+  transcription:
+    build:
+      context: .
+      dockerfile: Dockerfile.transcription
+    container_name: tnt-transcription
+    ports:
+      - "3002:3002"      # HTTP API
+    environment:
+      - NODE_ENV=production
+      - WHISPER_MODEL=base
+      - API_PORT=3002
+    volumes:
+      - whisper-models:/app/models
+    networks:
+      - tnt-network
+    restart: unless-stopped
+    depends_on:
+      - siprec-proxy
+
+  # UI - React dashboard
+  ui:
+    build:
+      context: .
+      dockerfile: Dockerfile.ui
+    container_name: tnt-ui
+    ports:
+      - "5173:80"
+    networks:
+      - tnt-network
+    restart: unless-stopped
+    depends_on:
+      - transcription
+
+  # SBC Simulator (development/testing only)
+  sbc-simulator:
+    build:
+      context: .
+      dockerfile: Dockerfile.transcription
+    container_name: tnt-sbc-simulator
+    command: ["pnpm", "run", "--filter", "@tnt/sbc-simulator", "start"]
+    environment:
+      - NODE_ENV=development
+      - SIPREC_TARGET=siprec-proxy:5060
+    networks:
+      - tnt-network
+    profiles:
+      - dev
+    restart: unless-stopped
+    depends_on:
+      - siprec-proxy
+
+networks:
+  tnt-network:
+    driver: bridge
+
+volumes:
+  whisper-models:
+    driver: local

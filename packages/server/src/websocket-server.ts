@@ -1,6 +1,10 @@
 import { WebSocketServer, WebSocket } from 'ws';
 import { WebSocketMessage } from './protocol';
 
+interface WebSocketWithAlive extends WebSocket {
+  isAlive: boolean;
+}
+
 export interface WebSocketServerConfig {
   port: number;
   heartbeatInterval?: number;
@@ -8,7 +12,7 @@ export interface WebSocketServerConfig {
 
 export class TntWebSocketServer {
   private wss: WebSocketServer | null = null;
-  private clients: Set<WebSocket> = new Set();
+  private clients: Set<WebSocketWithAlive> = new Set();
   private heartbeatTimer: NodeJS.Timeout | null = null;
   private config: Required<WebSocketServerConfig>;
 
@@ -78,35 +82,35 @@ export class TntWebSocketServer {
 
   private handleConnection(ws: WebSocket): void {
     console.log('New WebSocket client connected');
-    this.clients.add(ws);
+    const wsWithAlive = ws as WebSocketWithAlive;
+    wsWithAlive.isAlive = true;
+    this.clients.add(wsWithAlive);
 
-    (ws as any).isAlive = true;
-
-    ws.on('pong', () => {
-      (ws as any).isAlive = true;
+    wsWithAlive.on('pong', () => {
+      wsWithAlive.isAlive = true;
     });
 
-    ws.on('message', (data: Buffer) => {
+    wsWithAlive.on('message', (data: Buffer) => {
       try {
-        const message = JSON.parse(data.toString());
-        this.handleMessage(ws, message);
+        const message: unknown = JSON.parse(data.toString());
+        this.handleMessage(wsWithAlive, message);
       } catch (error) {
         console.error('Invalid message format:', error);
-        this.sendError(ws, 'INVALID_MESSAGE', 'Invalid message format');
+        this.sendError(wsWithAlive, 'INVALID_MESSAGE', 'Invalid message format');
       }
     });
 
-    ws.on('close', () => {
+    wsWithAlive.on('close', () => {
       console.log('Client disconnected');
-      this.clients.delete(ws);
+      this.clients.delete(wsWithAlive);
     });
 
-    ws.on('error', (error) => {
+    wsWithAlive.on('error', (error) => {
       console.error('WebSocket client error:', error);
-      this.clients.delete(ws);
+      this.clients.delete(wsWithAlive);
     });
 
-    this.sendStatus(ws, 'connected');
+    this.sendStatus(wsWithAlive, 'connected');
   }
 
   private handleMessage(_ws: WebSocket, message: unknown): void {
@@ -139,13 +143,14 @@ export class TntWebSocketServer {
   private startHeartbeat(): void {
     this.heartbeatTimer = setInterval(() => {
       this.clients.forEach((ws) => {
-        if ((ws as any).isAlive === false) {
+        if (!ws.isAlive) {
           console.log('Terminating inactive client');
           this.clients.delete(ws);
-          return ws.terminate();
+          ws.terminate();
+          return;
         }
 
-        (ws as any).isAlive = false;
+        ws.isAlive = false;
         ws.ping();
       });
     }, this.config.heartbeatInterval);
